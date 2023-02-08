@@ -1,37 +1,26 @@
 import axios from 'axios';
 
-export const DOGS_50 = () => {
-    axios.get('https://dog.ceo/api/breeds/image/random/50')
-    .then(function (response) {
-        // handle success
-        console.log(response);
-    })
-    .catch(function (error) {
-        // handle error
-        console.log(error);
-    })
-}
+export default{
+    async firstdogs(){
+        try {
+            const res = await axios.get('https://dog.ceo/api/breeds/image/random/50')
+            // console.log('apifirstdogs', res.data.message);
+            return res.data.message;
+        }
+        catch (error) {
+            // handle error
+            console.error(error);
+        }
+    },
 
-export const DOGS_50_2 = () => {
-    axios.get('https://dog.ceo/api/breeds/image/random/50')
-    .then(function (response) {
-        // handle success
-        console.log(response);
-    })
-    .catch(function (error) {
-        // handle error
-        console.log(error);
-    })
-}
-
-export const SEARCH = (query) => {
-    axios.get(`https://dog.ceo/api/breed/${query}/images/random`)
-    .then(function (response) {
-        // handle success
-        console.log(response);
-    })
-    .catch(function (error) {
-        // handle error
-        console.log(error);
-    })
+    async seconddogs(){
+        try {
+            const res = await axios.get('https://dog.ceo/api/breeds/image/random/50')
+            return res.data.message;
+        }
+        catch (error) {
+            // handle error
+            console.error(error);
+        }
+    },
 }
