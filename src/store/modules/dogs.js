@@ -1,8 +1,9 @@
 import axios from 'axios';
+import  { readFromCache, writeToCache } from '../../utils/cache';
 
 let currentDog = JSON.parse(localStorage.getItem('currentDog'));
 const state = () => ({
-    dogs: [],
+    dogs: readFromCache(),
     currentDog: currentDog ? currentDog : null,
     loading: false,
     query: ""
@@ -37,7 +38,6 @@ const state = () => ({
     },
     async getAllDogs ({ dispatch, commit }) {
         const dogs50 = await dispatch('get50Dogs')
-        console.log('first', dogs50)
         commit('toggleLoader', { status: true})
 
         await axios.get('https://dog.ceo/api/breeds/image/random/50')
@@ -65,15 +65,16 @@ const state = () => ({
   // mutations
   const mutations = {
     setDogs (state, payload) {
-      const dogs = payload.dogs50.concat(payload.dogs50_2);
-      state.dogs = dogs.map( value => {
-        const nameURL = value.replace("https://images.dog.ceo/breeds/", "");
-
-        return {
-            'url': value,
-            'name': nameURL.split("/")[0]
-        }
-      })
+        const dogs = payload.dogs50.concat(payload.dogs50_2);
+        const allDogs = dogs.map( value => {
+            const nameURL = value.replace("https://images.dog.ceo/breeds/", "");
+            return {
+                'url': value,
+                'name': nameURL.split("/")[0]
+            }
+        })
+        state.dogs = allDogs;
+        writeToCache(allDogs);
     },
     setCurrentDog(state, payload) {
         localStorage.setItem('currentDog', JSON.stringify(payload.dog));

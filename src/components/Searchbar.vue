@@ -1,12 +1,12 @@
 <template>
     <div class="relative">
         <input type="search" name="search" id="search" placeholder="Search ..." @input="handleSearch" :value="query"
-            class="text-sm rounded-lg border-neutral-200 border w-full px-1 py-3 bg-neutral-50 placeholder-neutral-500" 
+            class="text-sm rounded md:rounded-lg border-neutral-200 border w-full px-1 py-3 bg-neutral-50 placeholder-neutral-500" 
         />
     </div>
 </template>
 <script setup>
-import debounce from '../assets/debounce'
+import debounce from '../utils/debounce'
 import { useStore } from "vuex";
 import { computed } from 'vue'
 const store = useStore();
