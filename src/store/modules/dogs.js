@@ -1,18 +1,25 @@
-import index from "../../api";
 import axios from 'axios';
 
+let currentDog = JSON.parse(localStorage.getItem('currentDog'));
 const state = () => ({
     dogs: [],
-    currentDog: null
+    currentDog: currentDog ? currentDog : null,
+    loading: false,
+    query: ""
   })
   
   // getters
   const getters = {
     allDogs: (state) => {
-        return state.dogs;
+        return state.dogs.filter(dog => {
+            return dog.name.toLowerCase().includes(state.query.toLowerCase())
+        });
     },
     getCurrentDog: (state) => {
-        return state.currentDog
+        return state.currentDog;
+    },
+    getSearchQuery: (state) => {
+        return state.query;
     }
   }
   
@@ -31,7 +38,8 @@ const state = () => ({
     async getAllDogs ({ dispatch, commit }) {
         const dogs50 = await dispatch('get50Dogs')
         console.log('first', dogs50)
-        
+        commit('toggleLoader', { status: true})
+
         await axios.get('https://dog.ceo/api/breeds/image/random/50')
         .then( response => {
             const dogs50_2 = response.data.message;
@@ -41,12 +49,17 @@ const state = () => ({
                 dogs50,
                 dogs50_2
             })
+            commit('toggleLoader', { status: false})
         })
         .catch(function (error) {
             // handle error
             console.log(error);
         })
-      }
+    },
+
+    async searchDogs({ commit}, query){
+        await commit('setSearchDogs', query)
+    }
   }
   
   // mutations
@@ -63,7 +76,14 @@ const state = () => ({
       })
     },
     setCurrentDog(state, payload) {
+        localStorage.setItem('currentDog', JSON.stringify(payload.dog));
         state.currentDog = payload.dog
+    },
+    toggleLoader(state, payload){
+        state.loading = payload.status
+    },
+    setSearchDogs(state, query){
+        state.query = query
     }
   }
   

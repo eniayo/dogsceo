@@ -1,10 +1,16 @@
 <template>
     <div>
-        <div>
+        <router-link :to="'/'+props.dog.name" @click="handleClick(props.dog)">
             <img :src="props.dog.url" :alt="props.dog.name" class="rounded-lg">
-        </div>
+        </router-link>
     </div>
 </template>
 <script setup>
-const props = defineProps(['dog'])
+import { useStore } from "vuex";
+const store = useStore();
+const props = defineProps(['dog']);
+
+function handleClick(){
+    store.commit('dogs/setCurrentDog', {dog: props.dog})
+}
 </script>
