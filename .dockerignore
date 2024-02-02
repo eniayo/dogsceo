@@ -1,0 +1,20 @@
+# .dockerignore
+
+# Ignore node_modules directory
+node_modules
+
+# Ignore build artifacts
+dist
+
+# Ignore local development files
+.env
+
+# Ignore version control files
+.git
+.gitignore
+
+# Ignore any other unnecessary files or directories
+*.log
+*.swp
+.DS_Store
+

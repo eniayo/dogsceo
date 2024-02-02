@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dogsceo-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dogsceo-app   # Update the label to match your Docker container
+  template:
+    metadata:
+      labels:
+        app: dogsceo-app  # Update the label to match your Docker container
+    spec:
+      containers:
+      - name: dogsceo-app  # Update the container name to match your Docker container
+        image: 192.168.49.2:50555/dogsceo-app:latest  # Update the image name and tag to match your Docker container
+        ports:
+        - containerPort: 8080
+

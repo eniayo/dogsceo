@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: example-prometheus-rule
+spec:
+  groups:
+  - name: example-group
+    rules:
+    - alert: ExampleAlert
+      expr: up == 0
+      for: 1m
+      labels:
+        severity: critical
+

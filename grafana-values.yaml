@@ -1,0 +1,12 @@
+adminUser: admin
+adminPassword: admin
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+      - name: Prometheus
+        type: prometheus
+        url: http://my-prometheus-server
+        access: proxy
+        isDefault: true
+

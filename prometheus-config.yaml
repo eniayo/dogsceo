@@ -1,0 +1,4 @@
+rule_files:
+  - /path/to/prometheus-rules.yaml
+
+
