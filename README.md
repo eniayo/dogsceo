@@ -39,30 +39,57 @@ npm run test:unit
 ```sh
 npm run lint
 ```
-#Table of Contents
+Table of Contents
+
 Introduction
+
 Prerequisites
+
 Setup
+
 Install Minikube
+
 Start Minikube
+
 Deploy Application
+
 Expose Service
+
 Enable Ingress
+
 Deploy Prometheus
+
 Deploy Grafana
+
+
 Accessing Services
+
 Application
+
 Prometheus
+
 Grafana
+
 Scaling Your Application
+
 Monitoring and Management
+
 Kubernetes Dashboards
+
 Prometheus and Grafana
+
 Continuous Integration and Deployment (CI/CD)
+
 Horizontal Pod Autoscaler (HPA)
+
 Rolling Updates and Rollbacks
+
 Health Checks and Probes
+
 Alerting with Prometheus
+
 Alertmanager
+
 Alerting Rules
+
 Conclusion
